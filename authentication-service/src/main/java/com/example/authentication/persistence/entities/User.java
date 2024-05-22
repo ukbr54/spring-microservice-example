@@ -11,8 +11,8 @@ import lombok.Data;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity(name = "USERS")
 @Data
+@Entity
 public class User extends DateAudit  {
 
     @Id

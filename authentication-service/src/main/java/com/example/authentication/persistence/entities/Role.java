@@ -11,7 +11,7 @@ import java.util.Set;
 
 @Data
 @NoArgsConstructor
-@Entity(name = "ROLES")
+@Entity
 public class Role {
 
     @Id

@@ -1,0 +1,12 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+
+compiler.xml
+encodings.xml
+jarRepositories.xml
+misc.xml
+modules.xml
+vcs.xml
+workspace.xml
+spring-microservice-example.iml
