@@ -5,22 +5,23 @@ import com.example.authentication.validation.annotation.NullOrNotBlank;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @Data
-@Entity
+@Entity(name = "users")
 public class User extends DateAudit  {
 
     @Id
     @GeneratedValue
-    private Long id;
-    @Column(name = "user_id",unique = true,nullable = false,updatable = false)
-    @NotNull(message = "UserId cannot be null")
-    private String userId;
+    @Column(name = "user_id")
+    private Long userId;
+
+    @Column(name = "unique_id",unique = true,nullable = false,updatable = false)
+    @NotNull(message = "UniqueId cannot be null")
+    private String uniqueId;
 
     @Column(nullable = false,length = 120,unique = true)
     @NullOrNotBlank(message = "Email cannot be blank")
@@ -30,11 +31,6 @@ public class User extends DateAudit  {
     @Column(nullable = false,unique = true)
     @NotNull(message = "Password cannot be null")
     private String password;
-
-    @Column(unique = true,nullable = false)
-    @Size(min = 3,max = 40)
-    @NullOrNotBlank(message = "username cannot be null")
-    private String username;
 
     @Column(name = "is_active", nullable = false)
     private Boolean active;
@@ -61,10 +57,11 @@ public class User extends DateAudit  {
         roles.remove(role);
         role.getUserList().remove(this);
     }
-
+    public User(){
+        super();
+    }
     public User(User user){
-        id = user.getId();
-        username = user.getUsername();
+        userId = user.getUserId();
         password = user.getPassword();
         email = user.getEmail();
         active = user.getActive();

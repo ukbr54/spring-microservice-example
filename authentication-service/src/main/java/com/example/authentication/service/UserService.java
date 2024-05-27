@@ -12,7 +12,6 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -37,11 +36,10 @@ public class UserService {
         Boolean isNewUserAsAdmin = registerRequest.getRegisterAsAdmin();
         newUser.setEmail(registerRequest.getEmail());
         newUser.setPassword(registerRequest.getPassword());
-        newUser.setUsername(registerRequest.getUsername());
         newUser.addRoles(getRolesForNewUser(isNewUserAsAdmin));
         newUser.setActive(true);
         newUser.setIsEmailVerified(true);
-        newUser.setUserId(UUID.randomUUID().toString());
+        newUser.setUniqueId(UUID.randomUUID().toString());
         return newUser;
     }
 

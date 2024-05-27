@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -46,9 +47,12 @@ public class SecurityConfig {
     }
 
     @Bean
-    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+    public AuthenticationManager authManager(HttpSecurity http) throws Exception {
         LOGGER.info("Authentication Manager identify the list of Authentication Providers");
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+        AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
+        authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+        AuthenticationManager authenticationManager = authenticationManagerBuilder.build();
         LOGGER.info("DaoAuthenticationProvider found on list and called authenticate() method");
+        return authenticationManager;
     }
 }

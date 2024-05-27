@@ -23,6 +23,11 @@ public class CustomUserDetails extends User implements UserDetails {
     }
 
     @Override
+    public String getUsername() {
+        return super.getEmail();
+    }
+
+    @Override
     public boolean isAccountNonExpired() {
         return true;
     }
@@ -44,7 +49,7 @@ public class CustomUserDetails extends User implements UserDetails {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId());
+        return Objects.hash(getUserId());
     }
 
     @Override
@@ -56,6 +61,6 @@ public class CustomUserDetails extends User implements UserDetails {
             return false;
         }
         CustomUserDetails that = (CustomUserDetails) obj;
-        return Objects.equals(getId(), that.getId());
+        return Objects.equals(getUserId(), that.getUserId());
     }
 }

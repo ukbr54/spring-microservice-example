@@ -15,8 +15,6 @@ public class RegistrationRequest {
     private String email;
     @NotNull(message = "Registration password cannot be null")
     private String password;
-    @NullOrNotBlank(message = "Registration username can be null but not blank")
-    private String username;
     @NotNull(message = "Specify whether the user has to be registered as an admin or not")
     private Boolean registerAsAdmin;
 
